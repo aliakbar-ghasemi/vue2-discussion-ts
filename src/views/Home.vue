@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="">
+    <v-card class="home rounded my-6">
+      <div class="py-6 px-8 new-discussion">
+        <new-discussion />
+      </div>
+
+      <discussions class="pb-5" />
+    </v-card>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import NewDiscussion from "../components/discussion/StartOrReplyDiscussion.vue";
+import Discussions from "../components/discussion/Discussions.vue";
 
-@Component({
+export default {
   components: {
-    HelloWorld,
+    NewDiscussion,
+    Discussions,
   },
-})
-export default class Home extends Vue {}
+};
 </script>
+
+<style>
+.home {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+}
+
+.new-discussion {
+  background-color: #fafbfc;
+}
+</style>
