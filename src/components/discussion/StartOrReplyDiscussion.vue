@@ -1,10 +1,70 @@
 <template>
-  <div></div>
+  <div class="d-flex">
+    <rounded-image :src="user.avatar" :title="user.name" />
+    <v-textarea
+      v-model="discussionText"
+      rounded-xl
+      :label="isReply ? 'Reply' : 'Start a discussion'"
+      flat
+      class="ml-3 my-auto"
+      solo
+      outlined
+      dense
+      hide-details=""
+      auto-grow
+      rows="1"
+      @keydown.enter.prevent="submit"
+    ></v-textarea>
+  </div>
 </template>
 
-<script>
-export default {};
-</script>
+<script lang="ts">
+import RoundedImage from "../widget/RoundedImage.vue";
+import { mapGetters } from "vuex";
 
-<style lang="scss" scoped>
-</style>
+export default {
+  components: { RoundedImage },
+  props: {
+    isReply: {
+      type: Boolean,
+      default: false,
+    },
+    discussionId: {
+      type: String,
+      default: null,
+    },
+  },
+
+  computed: {
+    ...mapGetters('user', ['user'])
+  },
+
+  data() {
+    return {
+      discussionText: "",
+    };
+  },
+  methods: {
+    submit(): void {
+      if (!this.discussionText) {
+        return;
+      }
+
+      if (this.isReply) {
+        //Reply discussion
+        this.$store.dispatch("discussion/replyDiscussion", {
+          discussionText: this.discussionText,
+          discussionId: this.discussionId,
+        });
+      } else {
+        //Start discussion
+        this.$store.dispatch("discussion/startDiscussion", {
+          discussionText: this.discussionText,
+        });
+      }
+
+      this.discussionText = ""
+    },
+  },
+};
+</script>
