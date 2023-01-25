@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script >
 import RoundedImage from "../widget/RoundedImage.vue";
 import { mapGetters } from "vuex";
 
@@ -36,7 +36,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('user', ['user'])
+    ...mapGetters("user", ["user"]),
   },
 
   data() {
@@ -45,7 +45,7 @@ export default {
     };
   },
   methods: {
-    submit(): void {
+    submit() {
       if (!this.discussionText) {
         return;
       }
@@ -63,7 +63,7 @@ export default {
         });
       }
 
-      this.discussionText = ""
+      this.discussionText = "";
     },
   },
 };

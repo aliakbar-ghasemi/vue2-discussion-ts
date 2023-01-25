@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   props: {
     src: {
@@ -26,13 +26,13 @@ export default {
     },
   },
   computed: {
-    label() : string {
+    label() {
       if (this.title) {
         if (this.title.includes(" ")) {
           var chars = this.title.split(" ");
-          return (chars[0][0] + chars[1][0]).toUpperCase();
+          return (chars[0].charAt(0) + chars[1].charAt(0)).toUpperCase();
         } else {
-          return this.title[0];
+          return this.title.charAt(0);
         }
       }
       return "";
